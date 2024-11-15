@@ -1,0 +1,78 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-width: 90%;
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    padding: 20px;
+  }
+
+  .modal form input {
+    width: 80%; /* Adjust the width as needed */
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: center;    
+    margin-top: 20px;
+    width: 100%; /* Ensure buttons stretch horizontally */
+  }
+   
+  .modal-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-grow: 1; /* Ensure buttons are evenly sized */
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  .modal-actions button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .modal-actions button[type="submit"]:hover {
+    background-color: #66cc66;
+  }
+  
+  .modal-actions button[type="button"] {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .modal-actions button[type="button"]:hover {
+    background-color: #ff6666;
+  }
+  

@@ -1,0 +1,59 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+h4 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+h5 {
+    margin-top: 0;
+    font-size: 14px;
+}
+
+h6 {
+    margin-top: 0;
+    font-size: 12px;
+}
+
+
+ol {
+    list-style-type: none;
+}
+  
+
+.calendar-month {
+    display: grid;
+    /* background-color: lightblue; */
+
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);    
+    gap: 1vw;
+    width: 96vw;
+    margin-bottom: 1vw;
+    height: 54.86vw;    
+}
+
+

@@ -1,0 +1,40 @@
+.calendar-day {
+    background-color: white; 
+    /* #f1f1f1; */
+   /* width: 13vw; */
+    padding-top: 1vw;
+    text-align: center;
+    height: 13vw; 
+    font-size: 2vw;
+    transition-duration: 0.2s;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 1px solid #ccc;
+}
+
+/* .calendar-day-disabled {
+    pointer-events: none;    
+    background-color:rgb(230, 230, 230);
+} */
+
+.calendar-day-disabled {
+    background-color: lightgrey;
+    pointer-events: none;
+}
+
+
+.calendar-day-full {
+    background-color: rgb(248, 32, 32);
+}
+
+.calendar-day:hover {
+    filter: contrast(150%); 
+    /* transform: translateY(-6px);   */
+
+    transform: scale(150%);
+}    
+
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; }
+a:hover { color: black; }
+a:active { color: black; }

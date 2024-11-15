@@ -1,0 +1,75 @@
+/* Dayview.css */
+
+/* body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+h3 {
+    color: #333;
+}
+
+/* Day View Styles */
+.day {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.room {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 200px; /* Set a fixed width for each room */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 7px 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+/* Login Styles */
+.login {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.apartment-number {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.trash  {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(240, 231, 231);
+    color: rgb(19, 19, 19);
+    border: none;
+    padding: 10px;
+    z-index: 1000;
+  }
