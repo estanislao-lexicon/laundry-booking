@@ -23,7 +23,10 @@ function DayView () {
       setShowLogin(true);
 
     } else if (buttonClass.includes('booked')) {      
-      cancelBookedSlot();
+      // cancelBookedSlot();
+      setSelectedRoom(room);      
+      setSelectedTimeBlock(timeBlock);
+      setShowLogin(true);      
     }    
   };
 

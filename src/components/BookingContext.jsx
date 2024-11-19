@@ -13,13 +13,61 @@ export const BookingProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [bookingChangedFlag, setBookingChangedFlag] = useState(false);
 
-  // Function to update booking information in the database
+  
+  // Function to update booking information in the database, 
+  // just wraps the call to checkTimeSlot that books or cancel
   const bookTimeSlot = async (owner) => {
     if (!selectedDate || !selectedRoom || !selectedTimeBlock || !owner) {
       console.error("Missing required booking information");
       return;
     }
-    
+
+    await checkTimeSlot(owner);
+  }
+
+  /* first check if the slot is available */
+  const checkTimeSlot = async (owner) => 
+  {
+    try {
+      // Fetch room schedule data with relationships to Dates and Rooms tables
+      const { data, error } = await supabase        
+      .from('Room_Schedule')
+      .select(`
+        id,
+        time_block,
+        owner,
+        Rooms!inner(room_name),
+        Dates!inner(date)
+        `)  
+      .eq('Dates.date', selectedDate)
+      .eq('time_block', selectedTimeBlock )
+      .in('Rooms.room_name', [selectedRoom]);
+
+      console.log(data);
+
+      if (error) {
+        console.error("Error checking booking: ", error);
+      }
+
+      if( data.length === 0 ) {
+        await _bookTimeSlot( owner ); 
+      }
+      else if( data.length > 0 && data[0].owner !== owner )
+      {
+        return; // notify user that time was unavailable
+      } else {
+        await cancelTimeSlot(data[0].id);
+      }
+
+    } catch (err) {
+      console.error("availability check error", err);
+    }  
+  }  
+
+
+  /* the actual booking */ 
+  const _bookTimeSlot = async (owner) => {
+
     try {
       // Insert the date and get the inserted date ID
       const { data: dateData, error: dateError } = await supabase
@@ -32,7 +80,7 @@ export const BookingProvider = ({ children }) => {
 
       const dateId = dateData.id;
 
-      // Inser the room and get the inserted room ID
+      // Insert the room and get the inserted room ID
       const { data: roomData, error: roomError } = await supabase
       .from('Rooms')
       .insert([{ room_name: selectedRoom }])
@@ -64,32 +112,31 @@ export const BookingProvider = ({ children }) => {
     }
   };
 
-  // Function to cancel booked information in the database
-  // const cancelTimeSlot = async () => {
-  //   try {
-  //     // Perform cancellation logic here
-  //     console.log(`Canceling booking for ${room} at ${timeBlock}`);
-  //     // Example: update Supabase to remove the owner
-  //     const { error } = await supabase
-  //       .from('Room_Schedule')
-  //       .update({ owner: null })
-  //       .match({ 'Rooms.room_name': room, time_block: timeBlock });
-  
-  //     if (error) throw error;
-  
-  //     // Refresh the state
-  //     setSlots((prev) => {
-  //       const updated = { ...prev };
-  //       const roomSlots = updated[room];
-  //       const slot = roomSlots.find((s) => s.time_block === timeBlock);
-  //       if (slot) slot.owner = null;
-  //       return updated;
-  //     });
-  //   } catch (err) {
-  //     console.error('Error canceling booking:', err.message);
-  //     setError('Failed to cancel booking.');
-  //   }
-  // };
+  //  Function to cancel booked information in the database
+  const cancelTimeSlot = async (id) => {
+
+    console.log(`cancelTimeSlot ${id}`);
+
+    try {
+      const { error } = await supabase
+      .from('Room_Schedule')
+      .delete()
+      .update( {owner:null})
+      .eq('id', id );
+      
+      if (error) {
+        console.error("Error booking slot: ", error);
+      } else {
+        console.log("cancel done");
+        setBookingChangedFlag(!bookingChangedFlag);
+      }
+
+    } catch (err) {
+      console.error('Error canceling booking:', err.message);
+
+    }
+  };
+
 
   return (
     <BookingContext.Provider
