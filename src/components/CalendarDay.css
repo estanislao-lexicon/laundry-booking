@@ -16,7 +16,7 @@
 }
 
 .calendar-day-today {
-    border: 2px solid green;
+    border: 1px solid #000;
     box-shadow: rgba(0, 99, 0, 0.8) 0px 2px 8px 0px;
 }
 
