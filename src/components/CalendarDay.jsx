@@ -18,17 +18,21 @@ export default function CalendarDay( {date, data} ) {
         setSelectedDate(date);        
     }
   
-    let dayClassName="calendar-day";
-    let containerClassName="calendar-day-container";
+    let dayClassName = "calendar-day";
+    let containerClassName = "calendar-day-container";
     let bookingButton = <button className="calendar-day-button">Book</button>;
+    let today = dayjs();
 
-    if( dayjs().isAfter( date, 'day') )
+    if( today.isAfter( date, 'day') )
     {
         dayClassName = "calendar-day-disabled";  
         containerClassName = "calendar-day-container-disabled";
         bookingButton = <button className="calendar-day-button-show">Show</button>;
     }
-    // else if( (dayjs(date).date() % 5) === 0 ) // just set some dates as full for now
+    else if( today.isSame( date, 'day') )
+    {
+        dayClassName += " calendar-day-today";
+    }
     else if( data?.length >= 8 )
     {
         // check that all slots are booked, there can be duplicates currently
