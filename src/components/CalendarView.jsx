@@ -19,16 +19,10 @@ export default function CalendarView() {
         setLoading(true);
         // Fetch room schedule data with relationships to Dates and Rooms tables
         const { data, error } = await supabase        
-        .from('Room_Schedule')
-        .select(`
-          time_block,
-          owner,
-          Rooms!inner(room_name),
-          Dates!inner(date)
-          `)  
-        .gte('Dates.date', '2024-11-18') // Start date
-        .lte('Dates.date', '2024-12-15') // End date //Filter by day
-        .in('Rooms.room_name', ['room1', 'room2']);
+        .from('booking')
+        .select('date,timeslot,room,user_id')  
+        .gte('date', '2024-11-18') // Start date
+        .lte('date', '2024-12-15'); // End date //Filter by day
   
         setData(data);
 
@@ -65,14 +59,15 @@ export default function CalendarView() {
   for( let index = 0; index < 28; index++ )
   {
     const date = startDate.add( index, 'day' ).format('YYYY-MM-DD');
-    const dayData = calendarData?.filter(x => ( x.Dates.date === date));
-    // console.log( date +" "+ JSON.stringify(dayData) );
+    const dayData = calendarData?.filter(x => ( x.date === date));
+//    console.log( date +" "+ dayData?.length );
+//    console.log( JSON.stringify(dayData) );
     days.push( <CalendarDay key={index} date={date} data={dayData}/> );
   }
 
   return (
     <div className="calendar">
-      <h1>{getDate()}</h1>
+      <h1>{getDate()}</h1><p></p>
       <div>
         <div className="calendar-weekdays">
           <div>Monday</div>

@@ -59,13 +59,6 @@ ol {
   text-align: center;
 }
 
-calendar-month div {
-  padding: 0.5vw;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
 
 .calendar-month div:hover {
   background-color: #e3f2fd;
@@ -73,11 +66,6 @@ calendar-month div {
   cursor: pointer;
 }
 
-.calendar-month div.today {
-  background-color: #ffeb3b;
-  font-weight: bold;
-  color: #000;
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {

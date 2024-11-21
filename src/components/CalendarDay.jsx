@@ -35,8 +35,14 @@ export default function CalendarDay( {date, data} ) {
     }
     else if( data?.length >= 8 )
     {
+        // console.log("hello.");
         // check that all slots are booked, there can be duplicates currently
         bookingButton = <button className="calendar-day-button-full">Full</button>;            
+    }
+
+    if( today.isSame( date, 'day') )
+    {
+            dayClassName += " calendar-day-today";
     }
 
     return (
